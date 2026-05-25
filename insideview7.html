@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOXY TRADING</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    overflow:hidden;
+}
+
+/* BACKGROUND */
+
+.page{
+    display:none;
+    width:100%;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    position:relative;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.78),rgba(0,0,0,0.78)),
+    url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1600&auto=format&fit=crop');
+
+    background-size:cover;
+    background-position:center;
+    animation:bgMove 12s infinite alternate;
+}
+
+.active{
+    display:flex;
+}
+
+@keyframes bgMove{
+    from{
+        background-size:100%;
+    }
+
+    to{
+        background-size:110%;
+    }
+}
+
+/* FOOTER */
+
+.footer{
+    position:absolute;
+    bottom:10px;
+    width:100%;
+    text-align:center;
+    color:white;
+    font-size:14px;
+}
+
+/* CARD */
+
+.card{
+    width:360px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border-radius:22px;
+    padding:30px;
+    text-align:center;
+    color:white;
+    box-shadow:0 0 35px rgba(0,0,0,0.6);
+    animation:fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+h1,h2{
+    margin-bottom:20px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    border:none;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+}
+
+/* BUTTONS */
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:14px;
+    border:none;
+    border-radius:14px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+    background:#1d4ed8;
+}
+
+/* CREATIVE OPTIONS */
+
+.choice-btn{
+    height:80px;
+    font-size:19px;
+    font-weight:bold;
+    border-radius:20px;
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    box-shadow:0 0 20px rgba(37,99,235,0.6);
+}
+
+/* BACK BUTTON */
+
+.back-btn{
+    position:absolute;
+    top:15px;
+    left:15px;
+    width:75px;
+    padding:10px;
+    font-size:13px;
+    background:#111827;
+}
+
+/* POPUPS */
+
+.popup{
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    padding:30px;
+    border-radius:22px;
+    text-align:center;
+    width:280px;
+    z-index:9999;
+    animation:popup 0.4s ease;
+}
+
+@keyframes popup{
+    from{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(0.5);
+    }
+
+    to{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(1);
+    }
+}
+
+/* BAD EMOJI */
+
+.bad-emoji{
+    font-size:65px;
+    animation:shake 0.5s infinite alternate;
+}
+
+@keyframes shake{
+    from{
+        transform:translateX(-5px);
+    }
+
+    to{
+        transform:translateX(5px);
+    }
+}
+
+/* SUCCESS CHECK */
+
+.checkmark{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    display:block;
+    stroke-width:4;
+    stroke:#22c55e;
+    stroke-miterlimit:10;
+    margin:10px auto;
+}
+
+.checkmark_circle{
+    stroke-dasharray:166;
+    stroke-dashoffset:166;
+    stroke:#22c55e;
+    fill:none;
+    animation:stroke 0.6s forwards;
+}
+
+.checkmark_check{
+    stroke-dasharray:48;
+    stroke-dashoffset:48;
+    animation:stroke 0.3s 0.8s forwards;
+}
+
+@keyframes stroke{
+    100%{
+        stroke-dashoffset:0;
+    }
+}
+
+/* IFRAME */
+
+iframe{
+    width:100%;
+    height:100vh;
+    border:none;
+}
+
+.popup h2{
+    color:#111827;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+
+<div class="page active" id="loginPage">
+
+<div class="card">
+
+<h1>NOXY TRADING</h1>
+
+<input type="email" id="loginEmail" placeholder="Enter Email">
+
+<input type="password" id="loginPassword" placeholder="Enter Password">
+
+<button onclick="signIn()">
+Sign In
+</button>
+
+<button onclick="showPage('registerPage')">
+Register
+</button>
+
+</div>
+
+<div class="footer">
+NOXY TRADING <br>
+Contact Us For Details 7736680333
+</div>
+
+</div>
+
+<!-- REGISTER PAGE -->
+
+<div class="page" id="registerPage">
+
+<button class="back-btn" onclick="showPage('loginPage')">
+← Back
+</button>
+
+<div class="card">
+
+<h2>Create Account</h2>
+
+<input type="email" id="registerEmail" placeholder="Enter Email">
+
+<input type="password" id="registerPassword" placeholder="Create Password">
+
+<button onclick="registerUser()">
+Register Now
+</button>
+
+</div>
+
+<div class="footer">
+NOXY TRADING <br>
+Contact Us For Details 7736680333
+</div>
+
+</div>
+
+<!-- HOME PAGE -->
+
+<div class="page" id="homePage">
+
+<button class="back-btn" onclick="showPage('loginPage')">
+← Back
+</button>
+
+<div class="card">
+
+<h1>Select Your Choice</h1>
+
+<button class="choice-btn" onclick="showPage('joinPage')">
+Join Now
+</button>
+
+<button class="choice-btn" onclick="openTips()">
+Trading Tips
+</button>
+
+<button class="choice-btn" onclick="showPage('viewPage')">
+Trading View
+</button>
+
+<button class="choice-btn" onclick="openYoutube()">
+Trading Videos
+</button>
+
+</div>
+
+<div class="footer">
+NOXY TRADING <br>
+Contact Us For Details 7736680333
+</div>
+
+</div>
+
+<!-- JOIN PAGE -->
+
+<div class="page" id="joinPage">
+
+<button class="back-btn" onclick="showPage('homePage')">
+← Back
+</button>
+
+<div class="card">
+
+<h2>Join Now</h2>
+
+<input type="text" id="name" placeholder="Enter Name">
+
+<input type="email" id="email" placeholder="Enter Email">
+
+<input type="tel" id="phone" placeholder="Enter Phone Number">
+
+<button onclick="submitData()">
+Submit
+</button>
+
+</div>
+
+<div class="footer">
+NOXY TRADING <br>
+Contact Us For Details 7736680333
+</div>
+
+</div>
+
+<!-- TRADING VIEW PAGE -->
+
+<div class="page" id="viewPage">
+
+<button class="back-btn" onclick="showPage('homePage')">
+← Back
+</button>
+
+<iframe src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&theme=dark">
+</iframe>
+
+<div class="footer">
+NOXY TRADING <br>
+Contact Us For Details 7736680333
+</div>
+
+</div>
+
+<!-- ERROR POPUP -->
+
+<div class="popup" id="errorPopup">
+
+<div class="bad-emoji">
+😞
+</div>
+
+<h2>Email Not Registered</h2>
+
+<p style="color:black;">
+Please Register First
+</p>
+
+</div>
+
+<!-- SUCCESS POPUP -->
+
+<div class="popup" id="successPopup">
+
+<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+
+<circle class="checkmark_circle" cx="26" cy="26" r="25"/>
+
+<path class="checkmark_check" fill="none" d="M14 27l7 7 16-16"/>
+
+</svg>
+
+<h2>Done Successfully</h2>
+
+</div>
+
+<script>
+
+/* PAGE SWITCH */
+
+function showPage(pageId){
+
+    let pages =
+    document.querySelectorAll('.page');
+
+    pages.forEach(page=>{
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId)
+    .classList.add('active');
+}
+
+/* REGISTER */
+
+function registerUser(){
+
+    let email =
+    document.getElementById("registerEmail").value;
+
+    let password =
+    document.getElementById("registerPassword").value;
+
+    localStorage.setItem("userEmail",email);
+
+    localStorage.setItem("userPassword",password);
+
+    alert("Registration Successful");
+
+    showPage("loginPage");
+}
+
+/* SIGN IN */
+
+function signIn(){
+
+    let email =
+    document.getElementById("loginEmail").value;
+
+    let password =
+    document.getElementById("loginPassword").value;
+
+    let savedEmail =
+    localStorage.getItem("userEmail");
+
+    let savedPassword =
+    localStorage.getItem("userPassword");
+
+    if(email === savedEmail &&
+       password === savedPassword){
+
+        showPage("homePage");
+    }
+
+    else{
+
+        document.getElementById("errorPopup")
+        .style.display="block";
+
+        setTimeout(()=>{
+
+            document.getElementById("errorPopup")
+            .style.display="none";
+
+        },2000);
+    }
+}
+
+/* JOIN FORM */
+
+function submitData(){
+
+    let name =
+    document.getElementById("name").value;
+
+    let email =
+    document.getElementById("email").value;
+
+    let phone =
+    document.getElementById("phone").value;
+
+    let message =
+`New Join Request
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}`;
+
+    /* OPEN WHATSAPP */
+
+    window.open(
+    `https://wa.me/917736680342?text=${encodeURIComponent(message)}`,
+    "_blank"
+    );
+
+    /* SUCCESS */
+
+    document.getElementById("successPopup")
+    .style.display="block";
+
+    setTimeout(()=>{
+
+        document.getElementById("successPopup")
+        .style.display="none";
+
+        document.getElementById("name").value="";
+        document.getElementById("email").value="";
+        document.getElementById("phone").value="";
+
+        showPage("homePage");
+
+    },1500);
+}
+
+/* OPEN TIPS LINK */
+
+function openTips(){
+
+    window.open(
+    "https://www.truedata.in/blog/trend-trading#",
+    "_blank"
+    );
+}
+
+/* OPEN YOUTUBE */
+
+function openYoutube(){
+
+    window.open(
+    "https://youtu.be/FOaQO6tA3c0?si=p0Y4PovMTQsnq62F",
+    "_blank"
+    );
+}
+
+</script>
+
+</body>
+</html>
